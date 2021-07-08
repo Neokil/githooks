@@ -32,3 +32,10 @@ if test -e composer.json; then
         composer install
     fi
 fi
+
+#
+# If we have an executable init-file we will execute it
+#
+if test -x init; then
+    ./init
+fi
