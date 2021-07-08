@@ -1,0 +1,34 @@
+#!/bin/bash
+
+#
+# When checking out a branch this will make sure it pulls the latest version of that branch
+#
+if [[ "$3" == "1" ]]; then
+    remoteExists=$(git ls-remote --heads origin $(git rev-parse --abbrev-ref HEAD) | wc -l)
+    if [[ "$(($remoteExists + 0))" == "1" ]]; then
+        echo "Auto-Pulling branch..."
+        git pull
+    fi
+fi
+
+#
+# If we have a go-project we want to install the dependencies automatically
+#
+if test -e go.mod; then
+    echo "Auto-Updating dependencies using go-mod.."
+    go mod vendor
+fi
+
+#
+# If we have a php-project (with composer) we want to install the dependencies automatically
+#
+if test -e composer.json; then
+    if test -e bin/composer.phar; then
+        echo "Auto-Updating dependencies using Composer..."
+        php bin/composer install
+    fi
+    if command -v composer &> /dev/null; then
+        echo "Auto-Updating dependencies using Composer..."
+        composer install
+    fi
+fi

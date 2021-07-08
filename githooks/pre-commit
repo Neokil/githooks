@@ -1,0 +1,22 @@
+#!/bin/bash
+
+#
+# If we have a go-project we want to check if the go.mod and go.sum is up-to-date before committing
+#
+if test -e go.mod; then
+    goModBeforeShasum=$(shasum go.mod) &&
+    goSumBeforeShasum=$(shasum go.sum) &&
+
+    go mod tidy &&
+    go mod vendor &&
+
+    goModAfterShasum=$(shasum go.mod) &&
+    goSumAfterShasum=$(shasum go.sum) &&
+
+    if [[ "$goModBeforeShasum" == "$goModAfterShasum" ]] && [[ "$goSumBeforeShasum" == "$goSumAfterShasum" ]]; then
+        exit 0
+    else
+        echo "go.mod or go.sum have changed"
+        exit 1
+    fi
+fi
