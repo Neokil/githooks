@@ -25,7 +25,7 @@ fi
 if test -e composer.json; then
     if test -e bin/composer.phar; then
         echo "Auto-Updating dependencies using Composer..."
-        php bin/composer install
+        php bin/composer.phar install
     fi
     if command -v composer &> /dev/null; then
         echo "Auto-Updating dependencies using Composer..."
