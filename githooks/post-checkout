@@ -25,11 +25,11 @@ fi
 if test -e composer.json; then
     if test -e bin/composer.phar; then
         echo "Auto-Updating dependencies using Composer..."
-        php bin/composer install
+        php bin/composer install --ignore-platform-reqs
     fi
     if command -v composer &> /dev/null; then
         echo "Auto-Updating dependencies using Composer..."
-        composer install
+        composer install --ignore-platform-reqs
     fi
 fi
 
@@ -37,5 +37,5 @@ fi
 # If we have an executable init-file we will execute it
 #
 if test -x init; then
-    ./init
+    ./init --env=Development
 fi

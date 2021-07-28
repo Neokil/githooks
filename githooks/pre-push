@@ -3,6 +3,7 @@
 #
 # If we have a go-project we want to execute the appropriate file
 #
-if test -e go.mod; then
-    bash pre-push.golang
+if test -e go.mod; then    
+    bash $(dirname "${BASH_SOURCE[0]}")/pre-push.golang
+    exit $?
 fi
