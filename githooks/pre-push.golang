@@ -5,44 +5,44 @@
 #
 
 # 1. test 
-go test ./...
+go test ./... &&
 
 # 2. vet
-go vet ./...
+go vet ./... &&
 
 # 3. gofmt
-go get mvdan.cc/gofumpt
-go mod vendor
-gofumpt -l -w .
+go get mvdan.cc/gofumpt &&
+go mod vendor &&
+gofumpt -l -w . &&
 
 # 4. misspell
-go get github.com/client9/misspell/cmd/misspell
-go mod vendor
+go get github.com/client9/misspell/cmd/misspell &&
+go mod vendor &&
 misspell \
   -locale GB \
   -error \
-  *.md *.go
+  *.md *.go &&
 
 # 5. unconvert
-go get github.com/mdempsky/unconvert
-go mod vendor
-unconvert -v ./...
+go get github.com/mdempsky/unconvert &&
+go mod vendor &&
+unconvert -v ./... &&
 
 # 6. staticcheck
-go get honnef.co/go/tools/cmd/staticcheck
-go mod vendor
-staticcheck -checks all ./...
+go get honnef.co/go/tools/cmd/staticcheck &&
+go mod vendor &&
+staticcheck -checks all ./... &&
 
 # 7. ineffassign
-go get github.com/gordonklaus/ineffassign
-go mod vendor
-ineffassign ./...
+go get github.com/gordonklaus/ineffassign &&
+go mod vendor &&
+ineffassign ./... &&
 
 # 8. unparam
-go get mvdan.cc/unparam
-go mod vendor
-unparam ./...
+go get mvdan.cc/unparam &&
+go mod vendor &&
+unparam ./... &&
 
 # 9. gomod (to clean up)
-go mod tidy
+go mod tidy &&
 go mod vendor
