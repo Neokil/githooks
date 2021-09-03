@@ -11,36 +11,30 @@ go test ./... &&
 go vet ./... &&
 
 # 3. gofmt
-go get mvdan.cc/gofumpt &&
-go mod vendor &&
+go install mvdan.cc/gofumpt@latest &&
 gofumpt -l -w . &&
 
 # 4. misspell
-go get github.com/client9/misspell/cmd/misspell &&
-go mod vendor &&
+go install github.com/client9/misspell/cmd/misspell@latest &&
 misspell \
   -locale GB \
   -error \
   *.md *.go &&
 
 # 5. unconvert
-go get github.com/mdempsky/unconvert &&
-go mod vendor &&
+go install github.com/mdempsky/unconvert@latest &&
 unconvert -v ./... &&
 
 # 6. staticcheck
-go get honnef.co/go/tools/cmd/staticcheck &&
-go mod vendor &&
+go install honnef.co/go/tools/cmd/staticcheck@latest &&
 staticcheck -checks all ./... &&
 
 # 7. ineffassign
-go get github.com/gordonklaus/ineffassign &&
-go mod vendor &&
+go install github.com/gordonklaus/ineffassign@latest &&
 ineffassign ./... &&
 
 # 8. unparam
-go get mvdan.cc/unparam &&
-go mod vendor &&
+go install mvdan.cc/unparam@latest &&
 unparam ./... &&
 
 # 9. gomod (to clean up)
